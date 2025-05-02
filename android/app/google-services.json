@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "140955511207",
+    "project_id": "blood-life-16ce3",
+    "storage_bucket": "blood-life-16ce3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140955511207:android:9db1a187994976a25c6e82",
+        "android_client_info": {
+          "package_name": "com.example.blooddonationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140955511207-igaak3382fqcq5fvl7gh1ji211epbv3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM4egPwE8LU5nD6upmTmC1P3sDhn6aPoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140955511207-igaak3382fqcq5fvl7gh1ji211epbv3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "140955511207-sm9euvp60v5ossiqq90ptv4qjpmnn73l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blooddonationapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
