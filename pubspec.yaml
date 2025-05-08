@@ -31,6 +31,8 @@ dependencies:
   url_launcher: ^6.3.1
   font_awesome_flutter: ^10.8.0
   calendar_date_picker2: ^2.0.0
+  flutter_facebook_auth: ^7.1.2
+  # flutter_login_facebook: ^2.0.1
   # cached_network_image: ^3.4.1
   # google_sign_in: ^6.3.0
 

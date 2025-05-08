@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:blood_donation_app/controllers/user_controller.dart';
 import 'package:blood_donation_app/utils/location_getter.dart';
 import 'package:blood_donation_app/utils/shared_preferences_helper.dart';
@@ -22,6 +23,7 @@ class SignupController extends GetxController {
 
   void toggleDonor(bool value) {
     isDonor.value = value;
+    
   }
 
   Future<bool> verifyOTP(String otp) async {

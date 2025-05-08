@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "140955511207-f94m40rf3c7mfpn8odnva3mm5cvhmsmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blooddonationapp",
+            "certificate_hash": "f518ae11ad9141701a5b74642db19ad25fa916b0"
+          }
+        },
+        {
           "client_id": "140955511207-igaak3382fqcq5fvl7gh1ji211epbv3k.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -42,9 +42,19 @@ class User {
       username: json['username'],
       email: json['email'],
       isDonor: json['is_donor'],
-      firstName: json['firstname'],
+      firstName: (json['firstname'] == null ||
+                  json['firstname'].toString().trim().isEmpty) &&
+              (json['lastname'] == null ||
+                  json['lastname'].toString().trim().isEmpty)
+          ? json['username'].toString().split(' ').first
+          : json['firstname'],
+      lastName: (json['firstname'] == null ||
+                  json['firstname'].toString().trim().isEmpty) &&
+              (json['lastname'] == null ||
+                  json['lastname'].toString().trim().isEmpty)
+          ? json['username'].toString().split(' ').skip(1).join(' ')
+          : json['lastname'],
       id: json['_id'],
-      lastName: json['lastname'],
       birthday: json['birthday'],
       country: json['country'],
       zone: json['zone'],

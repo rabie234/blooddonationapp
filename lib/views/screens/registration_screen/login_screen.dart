@@ -7,8 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: use_key_in_widget_constructors
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final LoginController controller = Get.put(LoginController());
+
+  @override
+  void initState() {
+    controller.identifierController = TextEditingController();
+    controller.passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.identifierController.dispose();
+    controller.passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 GoogleLoginButton(),
                 SizedBox(height: 10),
-                FacebookLoginButton(),
+                // FacebookLoginButton(),
               ],
             ),
           ),

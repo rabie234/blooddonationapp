@@ -22,6 +22,7 @@ class SearchController extends GetxController {
   }
 
   void addFilter(String key, String value) {
+  
     if (value == 'All') {
       selectedFilters.remove(key);
     } else {

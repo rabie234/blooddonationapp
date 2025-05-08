@@ -45,5 +45,43 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fb1337648444194258</string>
+  </array>
+  </dict>
+  <dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>com.googleusercontent.apps.140955511207-sm9euvp60v5ossiqq90ptv4qjpmnn73l</string>
+		</array>
+	</dict>
+</array>
+<key>FacebookAppID</key>
+<string>1337648444194258</string>
+<key>FacebookClientToken</key>
+<string>1767517f78575a6d0a0428ca765f9bba</string>
+<key>FacebookDisplayName</key>
+<string>bloodDonation</string>
+
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-share-api</string>
+</array>
+	<key>GIDClientID</key>
+    <string>140955511207-sm9euvp60v5ossiqq90ptv4qjpmnn73l.apps.googleusercontent.com</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>This app needs access to your location to show your current position.</string>
+
+<key>NSLocationAlwaysUsageDescription</key>
+<string>This app needs access to your location even when the app is in the background.</string>
+
 </dict>
 </plist>

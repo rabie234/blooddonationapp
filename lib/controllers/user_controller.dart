@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:blood_donation_app/models/user.dart';
 import 'package:blood_donation_app/utils/http_helper.dart';
+import 'package:blood_donation_app/utils/shared_preferences_helper.dart';
 import 'package:blood_donation_app/views/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,6 +79,7 @@ class UserController extends GetxController {
 
   void clearUser() {
     user.value = null;
+    SharedPreferencesHelper.remove('token');
   }
 
   Future<bool> getUser() async {

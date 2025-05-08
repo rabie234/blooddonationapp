@@ -1,6 +1,7 @@
 import 'package:blood_donation_app/controllers/search_controller.dart'
     as custom;
 import 'package:blood_donation_app/controllers/user_controller.dart';
+import 'package:blood_donation_app/l10n/appLocal.dart';
 import 'package:blood_donation_app/models/zone.dart';
 import 'package:blood_donation_app/utils/global_colors.dart';
 import 'package:blood_donation_app/views/widgets/skeleton_search.dart';
@@ -24,7 +25,14 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String? filter = Get.arguments?['filter'];
+    final String currentLang = Get.locale?.languageCode ?? 'en';
 
+    final List<String> displayedFilters = [
+      AppLocale.gender,
+      AppLocale.bloodType,
+      AppLocale.requestDonator,
+      AppLocale.compatible,
+    ].map((key) => translateFilter(key, currentLang)).toList();
     // Apply the filter to the search controller
     if (filter != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -116,7 +124,7 @@ class SearchPage extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              filter,
+                              displayedFilters[filters.indexOf(filter)],
                               style: TextStyle(color: GlobalColors.accentColor),
                             ),
                           ),
@@ -248,7 +256,7 @@ class SearchPage extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return Container(
+        return SizedBox(
           height:
               MediaQuery.of(context).size.height * 0.8, // 80% of screen height
           child: MapSearch(
@@ -285,7 +293,7 @@ class SearchPage extends StatelessWidget {
                 SizedBox(height: 16),
                 if (filter == 'Gender') ...[
                   _buildFilterOption(context, 'All', filter),
-                  _buildFilterOption(context, 'male'.tr, filter),
+                  _buildFilterOption(context, 'male', filter),
                   _buildFilterOption(context, 'female', filter),
                 ] else if (filter == 'Blood Type') ...[
                   _buildFilterOption(context, 'All', filter),
@@ -322,7 +330,7 @@ class SearchPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-        title: Text(option),
+        title: Text(option.tr),
         onTap: () {
           if (searchController.selectedFilters[key] != null &&
               searchController.selectedFilters[key]!.contains(option)) {
