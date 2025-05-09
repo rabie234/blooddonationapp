@@ -17,7 +17,8 @@ void requestPermissions() async {
 
 /// Global SharedPreferences Instance
 late final SharedPreferences globalPrefs;
-
+  
+  
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final translations = await TranslationService.loadTranslations();
