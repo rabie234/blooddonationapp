@@ -167,7 +167,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'If you have any questions or concerns about these terms and conditions, please contact us at support@blooddonationapp.com.',
+              'If you have any questions or concerns about these terms and conditions, please contact us at support@bloodlife.org.',
               style: TextStyle(fontSize: 14, color: Colors.grey[800]),
             ),
             SizedBox(height: 30),

@@ -32,16 +32,16 @@ class Donator {
       name: json['name_visible'] == true
           ? json['firstname'] + json['lastname']
           : json['username'], // Optional field for image URL
-      zone: json['address']['zone_name'] ?? '',
+      zone: 'tripoli',
       username: json['username'] ?? '',
       bloodType: json['blood_type'] ?? '',
       age: json['age'] ?? 0,
-      country: json['address']['country_name'] ?? '',
+      country: '',
       telephone: json['telephone'] ?? '',
       description: json['description'] ?? '',
       email: json['email'] ?? '',
-      longitude: json['address']['longitude'] ?? 0.0,
-      latitude: json['address']['latitude'] ?? 0.0,
+      longitude: 0.0,
+      latitude: 0.0,
       isEmergency: json['type'] == "emergency" ? true : false,
     );
   }

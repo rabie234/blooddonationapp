@@ -122,17 +122,30 @@ class HomeController extends GetxController {
 
         // Create a new request
 
-        await httpHelper.post('/blood_data/add_blood_request', body);
+        final res =
+            await httpHelper.post('/blood_data/add_blood_request', body);
+        print(res);
+        final resData = jsonDecode(res.body);
+        if (res.statusCode == 200 && resData['success'] == true) {
+          // Dismiss the loading indicator
+          Get.back();
 
-        // Dismiss the loading indicator
-        Get.back();
+          CustomSnackbar.show(
+            title: 'Success',
+            message: 'The request has been added successfully.',
+            isError: false,
+          );
+          return true;
+        } else {
+          Get.back();
 
-        CustomSnackbar.show(
-          title: 'Success',
-          message: 'The request has been added successfully.',
-          isError: false,
-        );
-        return true;
+          CustomSnackbar.show(
+            title: 'Wrong',
+            message: resData['message'],
+            isError: true,
+          );
+          return true;
+        }
       } catch (e) {
         // Handle any exceptions
         Get.back(); // Dismiss the loading indicator if an error occurs

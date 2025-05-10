@@ -1,6 +1,6 @@
 {
   "All": "All",
-  "welcome": "Welcome to Blood Donation",
+  "welcome": "Welcome to Blood Life",
   "donate_now": "Donate Now",
   "request": "Request",
   "invite": "Invite",
@@ -16,6 +16,7 @@
   "no_data_message": "No {title} near you. Try searching in another location.",
   "age": "Age",
   "requesters": "Requesters",
+  "requester": "Requester",
   "donors": "Donors",
   "edit_profile": "Edit Profile",
   "no_user_data": "No user data available.",

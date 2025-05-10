@@ -152,14 +152,11 @@ class HomeScreen extends StatelessWidget {
                                 color: GlobalColors.primaryColor, size: 16),
                             SizedBox(width: 5),
                             Obx(() {
-                              final country =
-                                  userController.user.value?.country ??
-                                      'Unknown';
                               final zone =
                                   userController.user.value?.zone ?? 'Unknown';
                               return Flexible(
                                 child: Text(
-                                  '$country, $zone',
+                                  ' $zone',
                                   style: TextStyle(
                                     color: GlobalColors.accentColor,
                                     fontSize: 14,
