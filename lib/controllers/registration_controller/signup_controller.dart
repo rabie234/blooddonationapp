@@ -23,7 +23,6 @@ class SignupController extends GetxController {
 
   void toggleDonor(bool value) {
     isDonor.value = value;
-    
   }
 
   Future<bool> verifyOTP(String otp) async {
@@ -34,6 +33,7 @@ class SignupController extends GetxController {
       final body = {
         ...?tempSignupData, // Spread the saved sign-up data
         'otp': otp, // Add the OTP to the request body
+        'is_donor': tempSignupData?['isDonor']
       };
 
       // Send the POST request to verify OTP

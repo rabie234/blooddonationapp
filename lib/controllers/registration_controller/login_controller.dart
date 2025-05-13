@@ -79,8 +79,8 @@ class LoginController extends GetxController {
       'email': email,
       'name': userName,
       'provider': provider,
-      'longitude': 0,
-      'latitude': 0,
+      'longitude': longitude,
+      'latitude': latitude,
       if (isDonor != null) 'isDonor': isDonor,
     };
 

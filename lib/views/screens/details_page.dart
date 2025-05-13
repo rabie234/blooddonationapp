@@ -201,6 +201,11 @@ class DetailsPage extends StatelessWidget {
                   title: 'description'.tr,
                   value: donator.description!,
                 ),
+              if (donator.timeAgo != "")
+                _buildInfoTile(
+                  icon: Icons.timer,
+                  value: '${donator.timeAgo!} ago',
+                ),
             ],
           ),
         );
@@ -210,7 +215,7 @@ class DetailsPage extends StatelessWidget {
 
   Widget _buildInfoTile({
     required IconData icon,
-    required String title,
+    String? title,
     required String value,
     Widget? trailing,
   }) {
@@ -221,14 +226,15 @@ class DetailsPage extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "$title:",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: GlobalColors.textColor.withOpacity(0.6),
+          if (title != null)
+            Text(
+              "$title:",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: GlobalColors.textColor.withOpacity(0.6),
+              ),
             ),
-          ),
           Text(
             value,
             style: TextStyle(

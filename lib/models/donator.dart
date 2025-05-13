@@ -11,6 +11,7 @@ class Donator {
   final double longitude;
   final double latitude;
   final bool isEmergency;
+  final String? timeAgo;
 
   Donator(
       {required this.username,
@@ -24,7 +25,8 @@ class Donator {
       required this.longitude,
       required this.latitude,
       required this.isEmergency,
-      this.description});
+      this.description,
+      this.timeAgo});
 
   // Factory method to create a Donator object from JSON
   factory Donator.fromJson(Map<String, dynamic> json) {
@@ -32,17 +34,18 @@ class Donator {
       name: json['name_visible'] == true
           ? json['firstname'] + json['lastname']
           : json['username'], // Optional field for image URL
-      zone: 'tripoli',
+      zone: json['address']['zone_name'] ?? '',
       username: json['username'] ?? '',
       bloodType: json['blood_type'] ?? '',
       age: json['age'] ?? 0,
-      country: '',
+      country: json['address']['country_name'] ?? '',
       telephone: json['telephone'] ?? '',
       description: json['description'] ?? '',
       email: json['email'] ?? '',
-      longitude: 0.0,
-      latitude: 0.0,
+      longitude: json['address']['longitude'] ?? 0.0,
+      latitude: json['address']['latitude'] ?? 0.0,
       isEmergency: json['type'] == "emergency" ? true : false,
+      timeAgo: json['timeAgo'] ?? '',
     );
   }
 

@@ -96,7 +96,12 @@ class UserController extends GetxController {
         final userData = User.fromJson(responseJson['data']['user']);
         OneSignal.login(userData.id);
         setUser(userData);
-        Get.offAllNamed('/home');
+        if (responseJson['data']['user']['completed_info'] == false) {
+          Get.offAllNamed('/home');
+          Get.toNamed('/profile');
+        } else {
+          Get.offAllNamed('/home');
+        }
 
         return true;
       } else {

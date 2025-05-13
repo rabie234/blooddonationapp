@@ -109,150 +109,157 @@ class HomeScreen extends StatelessWidget {
               })
         ],
       ),
-      body: Obx(() {
-        if (homeController.isLoading.value) {
-          return Center(
-            child: SpinKitChasingDots(
-              color: GlobalColors.primaryColor,
-              size: 40.0,
-            ),
-          );
-        }
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await homeController.getData(); // Trigger the data reload
+        },
+        child: Obx(() {
+          if (homeController.isLoading.value) {
+            return Center(
+              child: SpinKitChasingDots(
+                color: GlobalColors.primaryColor,
+                size: 40.0,
+              ),
+            );
+          }
 
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ImageSlider(),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/search');
-                        // Handle location tap
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: GlobalColors.secondaryColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        constraints: BoxConstraints(
-                            minWidth: 100), // Ensure minimum width
-                        child: Row(
-                          mainAxisSize: MainAxisSize
-                              .min, // Ensure the Row takes only as much space as needed
-                          children: [
-                            Icon(Icons.location_on,
-                                color: GlobalColors.primaryColor, size: 16),
-                            SizedBox(width: 5),
-                            Obx(() {
-                              final zone =
-                                  userController.user.value?.zone ?? 'Unknown';
-                              return Flexible(
-                                child: Text(
-                                  ' $zone',
-                                  style: TextStyle(
-                                    color: GlobalColors.accentColor,
-                                    fontSize: 14,
-                                  ),
-                                  overflow: TextOverflow
-                                      .ellipsis, // Handle long text gracefully
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/profile');
-                        // Handle location tap
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: GlobalColors.primaryColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        // Ensure minimum width
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize
-                              .min, // Ensure the Row takes only as much space as needed
-                          children: [
-                            Icon(Icons.bloodtype,
-                                color: GlobalColors.backgroundColor, size: 16),
-                            Obx(() {
-                              final bloodType =
-                                  userController.user.value?.bloodType ?? '';
-                              return Row(
-                                children: [
-                                  SizedBox(width: 5),
-                                  Text(
-                                    bloodType,
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ImageSlider(),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/search');
+                          // Handle location tap
+                        },
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: GlobalColors.secondaryColor,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          constraints: BoxConstraints(
+                              minWidth: 100), // Ensure minimum width
+                          child: Row(
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensure the Row takes only as much space as needed
+                            children: [
+                              Icon(Icons.location_on,
+                                  color: GlobalColors.primaryColor, size: 16),
+                              SizedBox(width: 5),
+                              Obx(() {
+                                final zone = userController.user.value?.zone ??
+                                    'Unknown';
+                                return Flexible(
+                                  child: Text(
+                                    ' $zone',
                                     style: TextStyle(
-                                      color: GlobalColors.backgroundColor,
+                                      color: GlobalColors.accentColor,
                                       fontSize: 14,
                                     ),
                                     overflow: TextOverflow
                                         .ellipsis, // Handle long text gracefully
                                   ),
-                                ],
-                              );
-                            }),
-                          ],
+                                );
+                              }),
+                            ],
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                ActionButtonsWidget(),
-                SizedBox(height: 20),
-                DataSliderWidget(
-                  title: 'requesters'.tr,
-                  data:
-                      homeController.requesters, // Pass the list of requesters
-                  onViewAll: () {
-                    Get.toNamed(
-                      '/search',
-                      arguments: {
-                        'filter': 'requester', // Pass the filter for requesters
-                      },
-                    );
-                    // Handle location tap
-                  },
-                ),
-                SizedBox(height: 20),
-                DataSliderWidget(
-                  title: 'donors'.tr,
-                  data:
-                      homeController.donors, // Pass the list of Donator objects
-                  onViewAll: () {
-                    Get.toNamed(
-                      '/search',
-                      arguments: {
-                        'filter': 'donor', // Pass the filter for donators
-                      },
-                    );
-                    // Handle "View All" for donators
-                    print('View All Donators');
-                  },
-                ),
-                SizedBox(height: 20),
-              ],
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/profile');
+                          // Handle location tap
+                        },
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: GlobalColors.primaryColor,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          // Ensure minimum width
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize
+                                .min, // Ensure the Row takes only as much space as needed
+                            children: [
+                              Icon(Icons.bloodtype,
+                                  color: GlobalColors.backgroundColor,
+                                  size: 16),
+                              Obx(() {
+                                final bloodType =
+                                    userController.user.value?.bloodType ?? '';
+                                return Row(
+                                  children: [
+                                    SizedBox(width: 5),
+                                    Text(
+                                      bloodType,
+                                      style: TextStyle(
+                                        color: GlobalColors.backgroundColor,
+                                        fontSize: 14,
+                                      ),
+                                      overflow: TextOverflow
+                                          .ellipsis, // Handle long text gracefully
+                                    ),
+                                  ],
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  ActionButtonsWidget(),
+                  SizedBox(height: 20),
+                  DataSliderWidget(
+                    title: 'requesters'.tr,
+                    data: homeController
+                        .requesters, // Pass the list of requesters
+                    onViewAll: () {
+                      Get.toNamed(
+                        '/search',
+                        arguments: {
+                          'filter':
+                              'requester', // Pass the filter for requesters
+                        },
+                      );
+                      // Handle location tap
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  DataSliderWidget(
+                    title: 'donors'.tr,
+                    data: homeController
+                        .donors, // Pass the list of Donator objects
+                    onViewAll: () {
+                      Get.toNamed(
+                        '/search',
+                        arguments: {
+                          'filter': 'donor', // Pass the filter for donators
+                        },
+                      );
+                      // Handle "View All" for donators
+                      print('View All Donators');
+                    },
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }

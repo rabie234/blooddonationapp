@@ -108,5 +108,11 @@
   "add_request_confirmation": "هل أنت متأكد أنك تريد إضافة هذا الطلب؟",
   "add_request_note": "ملاحظة: لن تتمكن من إضافة طلب آخر اليوم بعد تأكيد هذا الطلب.",
 
-  "confirm": "تأكيد"
+  "confirm": "تأكيد",
+
+  "success": "نجاح",
+  "wrong": "خطأ",
+  "messageAddSuccess": "تمت إضافة الطلب بنجاح.",
+  "messageAddFailed": "فشل في إضافة الطلب.",
+  "messageAddException": "حدث خطأ أثناء إضافة الطلب. يرجى المحاولة مرة أخرى لاحقًا."
 }

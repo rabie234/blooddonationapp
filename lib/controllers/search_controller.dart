@@ -22,7 +22,6 @@ class SearchController extends GetxController {
   }
 
   void addFilter(String key, String value) {
-  
     if (value == 'All') {
       selectedFilters.remove(key);
     } else {
@@ -55,7 +54,7 @@ class SearchController extends GetxController {
 
         // Parse the autocomplete results into a list of Zone objects
         if (responseData['data'] != null) {
-          searchCountryResults.value = (responseData['data'] as List)
+          searchCountryResults.value = (responseData['data']['zones'] as List)
               .map((json) => Zone.fromJson(json))
               .toList();
         } else {
@@ -75,9 +74,11 @@ class SearchController extends GetxController {
     }
   }
 
-  void handleSelectZone(String zoneId, String zoneName) {
-    searchInputController.text = zoneName;
-    selectedFilters['zone_id'] = zoneId; // Add the selected zone ID to filters
+  void handleSelectZone(String city, String country) {
+    searchInputController.text = city;
+    selectedFilters['city'] = city; // Add the selected zone ID to filters
+    selectedFilters['country'] =
+        country; // Add the selected country ID to filters
     search();
   }
 
@@ -91,12 +92,13 @@ class SearchController extends GetxController {
         "blood_type": selectedFilters["Blood Type"] ?? "",
         "gender": selectedFilters["Gender"] ?? "",
         "type": selectedFilters["Request/Donator"] ?? "",
-        "zone_id": selectedFilters["zone_id"] ?? "",
+        "city": selectedFilters["city"] ?? "",
+        "country": selectedFilters["country"] ?? "",
         "compatible": selectedFilters["Compatible"] ?? "",
       };
       final query = Uri(queryParameters: queryParams).query;
       final response = await httpHelper.get('/search/search_blood_data?$query');
-
+      print('/search/search_blood_data?$query');
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
 

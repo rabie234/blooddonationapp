@@ -9,33 +9,29 @@ import 'package:blood_donation_app/models/donator.dart';
 class HomeController extends GetxController {
   var isLoading = false.obs;
   var requesters = <Donator>[].obs;
-  var donors = <Donator>[].obs; // Use Donator type for donors
+  var donors = <Donator>[].obs;
   static RxBool isCopied = false.obs;
 
-  final HttpHelper httpHelper = HttpHelper(); // Instance of HttpHelper
+  final HttpHelper httpHelper = HttpHelper();
 
   @override
   void onInit() {
     super.onInit();
-    getData(); // Automatically fetch data when the controller is initialized
+    getData();
   }
 
   Future<void> getData() async {
     try {
       isLoading.value = true;
-
-      // Make the API call to fetch nearest blood data
       final response = await httpHelper.get('/blood_data/nearest_blood_data');
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-
         requesters.value = (responseData['data']['blood_requests'] ?? [])
             .map<Donator>((json) => Donator.fromJson(json))
             .toList();
         donors.value = (responseData['data']['donators'] ?? [])
             .map<Donator>((json) => Donator.fromJson(json))
             .toList();
-
         print('Donors: ${donors.length}');
       } else {
         print('Failed to fetch data: ${response.statusCode}');
@@ -49,14 +45,8 @@ class HomeController extends GetxController {
 
   static void copyInviteLink(BuildContext context) {
     const String inviteLink = 'https://bloodlife.org';
-
-    // Copy the link to the clipboard
     Clipboard.setData(ClipboardData(text: inviteLink));
-
-    // Set isCopied to true
     isCopied.value = true;
-
-    // Revert isCopied to false after 3 seconds
     Future.delayed(Duration(seconds: 3), () {
       isCopied.value = false;
     });
@@ -64,7 +54,6 @@ class HomeController extends GetxController {
 
   Future<bool> addRequest(
       BuildContext context, Map<String, dynamic> body) async {
-    // Show a confirmation dialog
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -90,7 +79,7 @@ class HomeController extends GetxController {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(false); // Cancel
+                Navigator.of(context).pop(false);
               },
               child: Text(
                 'cancel'.tr,
@@ -99,7 +88,7 @@ class HomeController extends GetxController {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(true); // Confirm
+                Navigator.of(context).pop(true);
               },
               child: Text(
                 'confirm'.tr,
@@ -111,55 +100,45 @@ class HomeController extends GetxController {
       },
     );
 
-    // If the user confirmed, proceed with adding the request
     if (confirmed == true) {
       try {
-        // Show a loading indicator
         Get.dialog(
           Center(child: CircularProgressIndicator()),
           barrierDismissible: false,
         );
 
-        // Create a new request
-
         final res =
             await httpHelper.post('/blood_data/add_blood_request', body);
-        print(res);
         final resData = jsonDecode(res.body);
-        if (res.statusCode == 200 && resData['success'] == true) {
-          // Dismiss the loading indicator
-          Get.back();
 
+        Get.back();
+
+        if (res.statusCode == 201 && resData['success'] == true) {
           CustomSnackbar.show(
-            title: 'Success',
-            message: 'The request has been added successfully.',
+            title: 'success'.tr,
+            message: 'messageAddSuccess'.tr,
             isError: false,
           );
           return true;
         } else {
-          Get.back();
-
           CustomSnackbar.show(
-            title: 'Wrong',
-            message: resData['message'],
+            title: 'wrong'.tr,
+            message: resData['message'] ?? 'messageAddFailed'.tr,
             isError: true,
           );
           return true;
         }
       } catch (e) {
-        // Handle any exceptions
-        Get.back(); // Dismiss the loading indicator if an error occurs
+        Get.back();
         CustomSnackbar.show(
-          title: 'Error',
-          message:
-              'An error occurred while adding the request. Please try again later.',
+          title: 'error'.tr,
+          message: 'messageAddException'.tr,
           isError: true,
         );
         return false;
       }
     }
 
-    // If the user canceled, return false
     return false;
   }
 }

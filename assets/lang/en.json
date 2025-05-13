@@ -110,5 +110,10 @@
   "add_request_confirmation": "Are you sure you want to add this blood request?",
   "add_request_note": "Note: You will not be able to add another request today after confirming this one.",
 
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "success": "Success",
+  "wrong": "Wrong",
+  "messageAddSuccess": "The request has been added successfully.",
+  "messageAddFailed": "Failed to add the request.",
+  "messageAddException": "An error occurred while adding the request. Please try again later."
 }

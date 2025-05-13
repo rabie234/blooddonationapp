@@ -139,7 +139,7 @@ class DataSliderWidget extends StatelessWidget {
                                   const SizedBox(width: 4),
                                   Expanded(
                                     child: Text(
-                                      '${donator.country}, ${donator.zone}',
+                                      ' ${donator.zone}',
                                       style: const TextStyle(
                                         fontSize: 12,
                                         color: Colors.grey,
@@ -151,12 +151,26 @@ class DataSliderWidget extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 5),
-                              Text(
-                                '${'age'.tr}: ${donator.age}',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${'age'.tr}: ${donator.age}',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  if (donator.timeAgo != "")
+                                    Text(
+                                      ' ${donator.timeAgo} ago',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                ],
                               ),
                             ],
                           ),

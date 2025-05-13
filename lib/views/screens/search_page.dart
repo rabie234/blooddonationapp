@@ -41,7 +41,7 @@ class SearchPage extends StatelessWidget {
     }
     final user = userController.user.value;
     final String defaultHintText = user != null
-        ? '${user.country ?? 'Search'}, ${user.zone ?? 'Location'}'
+        ? user.zone ?? 'Search location ...'
         : 'search_default_country'.tr;
 
     return Scaffold(
@@ -194,7 +194,7 @@ class SearchPage extends StatelessWidget {
                                 ),
                                 title: Text(donor.username),
                                 subtitle: Text(
-                                    ' ${donor.bloodType} 🩸   ,  ${donor.country} , ${donor.zone} 📍'),
+                                    ' ${donor.bloodType} 🩸    📍  ${donor.zone} '),
                               ),
                             );
                           },
@@ -224,10 +224,10 @@ class SearchPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final Zone zone = autocompleteResults[index];
                           return ListTile(
-                            title: Text(zone.name),
+                            title: Text('📍${zone.country}, ${zone.city}'),
                             onTap: () {
                               searchController.handleSelectZone(
-                                  zone.id, zone.name);
+                                  zone.city, zone.country);
                               searchController.searchCountryResults
                                   .clear(); // Clear autocomplete
                             },
