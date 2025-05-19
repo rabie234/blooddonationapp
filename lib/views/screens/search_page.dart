@@ -106,7 +106,8 @@ class SearchPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: GestureDetector(
                           onTap: () {
-                            _showFilterBottomSheet(context, filter);
+                            _showFilterBottomSheet(
+                                context, filter, currentLang);
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -267,7 +268,14 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  void _showFilterBottomSheet(BuildContext context, String filter) {
+  void _showFilterBottomSheet(
+      BuildContext context, String filter, currentlanguage) {
+    final Map<String, String> AppLocaleMap = {
+      'Gender': AppLocale.gender,
+      'Blood Type': AppLocale.bloodType,
+      'Request/Donator': AppLocale.requestDonator,
+      'Compatible': AppLocale.compatible,
+    };
     showModalBottomSheet(
       backgroundColor: GlobalColors.secondaryColor,
       context: context,
@@ -283,7 +291,7 @@ class SearchPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Filter by $filter',
+                  '${'filter_by'.tr} ${translateFilter(AppLocaleMap[filter] ?? filter, currentlanguage)}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

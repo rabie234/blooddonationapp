@@ -123,140 +123,112 @@ class HomeScreen extends StatelessWidget {
             );
           }
 
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          return ListView(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+            children: [
+              ImageSlider(),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ImageSlider(),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed('/search');
-                          // Handle location tap
-                        },
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: GlobalColors.secondaryColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          constraints: BoxConstraints(
-                              minWidth: 100), // Ensure minimum width
-                          child: Row(
-                            mainAxisSize: MainAxisSize
-                                .min, // Ensure the Row takes only as much space as needed
-                            children: [
-                              Icon(Icons.location_on,
-                                  color: GlobalColors.primaryColor, size: 16),
-                              SizedBox(width: 5),
-                              Obx(() {
-                                final zone = userController.user.value?.zone ??
-                                    'Unknown';
-                                return Flexible(
-                                  child: Text(
-                                    ' $zone',
-                                    style: TextStyle(
-                                      color: GlobalColors.accentColor,
-                                      fontSize: 14,
-                                    ),
-                                    overflow: TextOverflow
-                                        .ellipsis, // Handle long text gracefully
-                                  ),
-                                );
-                              }),
-                            ],
-                          ),
-                        ),
+                  // location container
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/search');
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: GlobalColors.secondaryColor,
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed('/profile');
-                          // Handle location tap
-                        },
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: GlobalColors.primaryColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // Ensure minimum width
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize
-                                .min, // Ensure the Row takes only as much space as needed
-                            children: [
-                              Icon(Icons.bloodtype,
-                                  color: GlobalColors.backgroundColor,
-                                  size: 16),
-                              Obx(() {
-                                final bloodType =
-                                    userController.user.value?.bloodType ?? '';
-                                return Row(
-                                  children: [
-                                    SizedBox(width: 5),
-                                    Text(
-                                      bloodType,
-                                      style: TextStyle(
-                                        color: GlobalColors.backgroundColor,
-                                        fontSize: 14,
-                                      ),
-                                      overflow: TextOverflow
-                                          .ellipsis, // Handle long text gracefully
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                      constraints: BoxConstraints(minWidth: 100),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.location_on,
+                              color: GlobalColors.primaryColor, size: 16),
+                          SizedBox(width: 5),
+                          Obx(() {
+                            final zone =
+                                userController.user.value?.zone ?? 'Unknown';
+                            return Flexible(
+                              child: Text(
+                                ' $zone',
+                                style: TextStyle(
+                                  color: GlobalColors.accentColor,
+                                  fontSize: 14,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 20),
-                  ActionButtonsWidget(),
-                  SizedBox(height: 20),
-                  DataSliderWidget(
-                    title: 'requesters'.tr,
-                    data: homeController
-                        .requesters, // Pass the list of requesters
-                    onViewAll: () {
-                      Get.toNamed(
-                        '/search',
-                        arguments: {
-                          'filter':
-                              'requester', // Pass the filter for requesters
-                        },
-                      );
-                      // Handle location tap
+                  // blood type container
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/profile');
                     },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: GlobalColors.primaryColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.bloodtype,
+                              color: GlobalColors.backgroundColor, size: 16),
+                          Obx(() {
+                            final bloodType =
+                                userController.user.value?.bloodType ?? '';
+                            return Row(
+                              children: [
+                                SizedBox(width: 5),
+                                Text(
+                                  bloodType,
+                                  style: TextStyle(
+                                    color: GlobalColors.backgroundColor,
+                                    fontSize: 14,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 20),
-                  DataSliderWidget(
-                    title: 'donors'.tr,
-                    data: homeController
-                        .donors, // Pass the list of Donator objects
-                    onViewAll: () {
-                      Get.toNamed(
-                        '/search',
-                        arguments: {
-                          'filter': 'donor', // Pass the filter for donators
-                        },
-                      );
-                      // Handle "View All" for donators
-                      print('View All Donators');
-                    },
-                  ),
-                  SizedBox(height: 20),
                 ],
               ),
-            ),
+              SizedBox(height: 20),
+              ActionButtonsWidget(),
+              SizedBox(height: 20),
+              DataSliderWidget(
+                title: 'requesters'.tr,
+                data: homeController.requesters,
+                onViewAll: () {
+                  Get.toNamed('/search', arguments: {'filter': 'requester'});
+                },
+              ),
+              SizedBox(height: 20),
+              DataSliderWidget(
+                title: 'donors'.tr,
+                data: homeController.donors,
+                onViewAll: () {
+                  Get.toNamed('/search', arguments: {'filter': 'donor'});
+                },
+              ),
+              SizedBox(height: 20),
+            ],
           );
         }),
       ),

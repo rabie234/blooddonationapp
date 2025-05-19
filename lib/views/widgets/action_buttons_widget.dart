@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:blood_donation_app/controllers/home_controller.dart';
 
 class ActionButtonsWidget extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final HomeController homeController =
+      Get.put<HomeController>(HomeController());
 
   final List<Map<String, dynamic>> actions = [
     {

@@ -218,12 +218,30 @@ class ProfileScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: 15),
-                CustomInputField(
-                  readOnly: true,
-                  hintText: 'country'.tr,
-                  controller: userController.countryController,
-                  keyboardType: TextInputType.text,
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        // <-- you probably want this INSIDE for the input to take full width
+                        child: CustomInputField(
+                          readOnly: true,
+                          hintText: 'country'.tr,
+                          controller: userController.countryController,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          userController.updateLocation();
+                        },
+                        icon: Icon(Icons.refresh),
+                      ),
+                    ],
+                  ),
                 ),
+
                 SizedBox(height: 15),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(

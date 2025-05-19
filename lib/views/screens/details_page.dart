@@ -11,7 +11,8 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NotificationController notificationController = Get.find();
+    final NotificationController notificationController =
+        Get.put(NotificationController());
     notificationController.initArguments();
 
     return Scaffold(

@@ -4,6 +4,7 @@ import 'package:blood_donation_app/utils/http_helper.dart';
 import 'package:blood_donation_app/utils/shared_preferences_helper.dart';
 import 'package:blood_donation_app/views/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -117,6 +118,67 @@ class UserController extends GetxController {
       CustomSnackbar.show(
         title: 'Error',
         message: 'Failed to fetch user info. Please try again later.',
+        isError: true,
+      );
+      return false;
+    }
+  }
+
+  Future<bool> updateLocation() async {
+    try {
+      // Check and request location permission
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission != LocationPermission.always &&
+            permission != LocationPermission.whileInUse) {
+          CustomSnackbar.show(
+            title: 'Permission Denied',
+            message: 'Location permission is required to update your location.',
+            isError: true,
+          );
+          return false;
+        }
+      }
+
+      // Get current position
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      final requestBody = {
+        'latitude': position.latitude,
+        'longitude': position.longitude,
+      };
+
+      // Send the PUT request to the API
+      final response = await httpHelper.put('/account/address', requestBody);
+      final responseJson = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && responseJson['success'] == true) {
+        getUser();
+        CustomSnackbar.show(
+          title: 'Success',
+          message: 'Your profile has been updated successfully!',
+          isError: false,
+        );
+        return true;
+      } else {
+        final error = responseJson['message'] ?? 'Failed to update profile';
+        CustomSnackbar.show(
+          title: 'Error',
+          message: error,
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print("Error updating user: $e");
+      CustomSnackbar.show(
+        title: 'Error',
+        message:
+            'An error occurred while updating the profile. Please try again later.',
         isError: true,
       );
       return false;

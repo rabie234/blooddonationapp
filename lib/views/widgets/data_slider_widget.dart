@@ -122,7 +122,7 @@ class DataSliderWidget extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                donator.username,
+                                donator.name,
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
