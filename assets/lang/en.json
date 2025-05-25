@@ -1,11 +1,12 @@
 {
   "All": "All",
-  "welcome": "Welcome to Blood Life",
+  "welcome": "Blood Life",
   "donate_now": "Donate Now",
   "request": "Request",
   "invite": "Invite",
   "link_copied": "Link copied!",
   "emergency": "Emergency",
+  "loading": "Loading",
   "emergency_request": "Emergency",
   "quantity": "Quantity",
   "blood_type": "Blood Type",
@@ -108,10 +109,12 @@
 
   "add_request": "Add Blood Request",
   "add_request_confirmation": "Are you sure you want to add this blood request?",
-  "add_request_note": "Note: You will not be able to add another request today after confirming this one.",
-
+  "add_request_note": "Note: You will not be able to send another request today after confirming this one, and this request will be deleted after 72 hours.",
+  "donor": "Donor",
   "confirm": "Confirm",
   "success": "Success",
+  "true": "yes",
+  "false": "no",
   "wrong": "Wrong",
   "messageAddSuccess": "The request has been added successfully.",
   "messageAddFailed": "Failed to add the request.",

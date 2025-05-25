@@ -153,38 +153,42 @@ class DetailsPage extends StatelessWidget {
               ),
 
               // Location
+
               _buildInfoTile(
                 icon: Icons.pin_drop,
                 title: 'location'.tr,
                 value: "${donator.country}, ${donator.zone}",
-                trailing: IconButton(
-                  icon: Icon(Icons.map, color: GlobalColors.primaryColor),
-                  onPressed: () async {
-                    final Uri googleMapsUri = Uri(
-                      scheme: 'https',
-                      host: 'www.google.com',
-                      path: '/maps/search/',
-                      queryParameters: {
-                        'api': '1',
-                        'query': '${donator.latitude},${donator.longitude}',
-                      },
-                    );
+                trailing: donator.mapVisible
+                    ? IconButton(
+                        icon: Icon(Icons.map, color: GlobalColors.primaryColor),
+                        onPressed: () async {
+                          final Uri googleMapsUri = Uri(
+                            scheme: 'https',
+                            host: 'www.google.com',
+                            path: '/maps/search/',
+                            queryParameters: {
+                              'api': '1',
+                              'query':
+                                  '${donator.latitude},${donator.longitude}',
+                            },
+                          );
 
-                    // if (await canLaunchUrl(googleMapsUri)) {
-                    try {
-                      await launchUrl(googleMapsUri);
-                    } catch (err) {
-                      print(err);
-                    }
-                    // } else {
-                    //   CustomSnackbar.show(
-                    //     title: 'error'.tr,
-                    //     message: 'error_map'.tr,
-                    //     isError: true,
-                    //   );
-                    // }
-                  },
-                ),
+                          // if (await canLaunchUrl(googleMapsUri)) {
+                          try {
+                            await launchUrl(googleMapsUri);
+                          } catch (err) {
+                            print(err);
+                          }
+                          // } else {
+                          //   CustomSnackbar.show(
+                          //     title: 'error'.tr,
+                          //     message: 'error_map'.tr,
+                          //     isError: true,
+                          //   );
+                          // }
+                        },
+                      )
+                    : null,
               ),
 
               // Age

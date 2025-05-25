@@ -1,5 +1,5 @@
 {
-  "welcome": "مرحباً بكم في blood Life",
+  "welcome": "Blood Life",
   "donate_now": "تبرع الآن",
   "All": "الكل",
   "request": "طلب",
@@ -7,6 +7,7 @@
   "link_copied": "تم نسخ الرابط!",
   "emergency": "طوارئ",
   "emergency_request": "طلب طارئ",
+  "loading": "تحميل",
   "quantity": "الكمية",
   "blood_type": "فصيلة الدم",
   "description": "الوصف",
@@ -18,6 +19,9 @@
   "requesters": "الطالبين",
   "requester": "الطالب",
   "donors": "المتبرعين",
+  "donor": "متبرع",
+  "true": "نعم",
+  "false": "لا",
   "edit_profile": "تعديل الملف الشخصي",
   "no_user_data": "لا توجد بيانات للمستخدم.",
   "change_language": "تغيير اللغة",
@@ -107,9 +111,7 @@
   "add_request": "إضافة طلب دم",
   "add_request_confirmation": "هل أنت متأكد أنك تريد إضافة هذا الطلب؟",
   "add_request_note": "ملاحظة: لن تتمكن من إضافة طلب آخر اليوم بعد تأكيد هذا الطلب.",
-
   "confirm": "تأكيد",
-
   "success": "نجاح",
   "wrong": "خطأ",
   "messageAddSuccess": "تمت إضافة الطلب بنجاح.",

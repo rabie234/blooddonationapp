@@ -11,6 +11,7 @@ class Donator {
   final double longitude;
   final double latitude;
   final bool isEmergency;
+  final bool mapVisible;
   final String? timeAgo;
 
   Donator(
@@ -19,6 +20,7 @@ class Donator {
       required this.age,
       required this.country,
       required this.telephone,
+      required this.mapVisible,
       required this.email,
       required this.zone,
       required this.name,
@@ -32,11 +34,12 @@ class Donator {
   factory Donator.fromJson(Map<String, dynamic> json) {
     return Donator(
       name: json['name_visible'] == true
-          ? json['firstname'] + json['lastname']
+          ? json['firstname'] + " " + json['lastname']
           : json['username'], // Optional field for image URL
       zone: json['address']['zone_name'] ?? '',
       username: json['username'] ?? '',
       bloodType: json['blood_type'] ?? '',
+      mapVisible: json['map_visible'] ?? false,
       age: json['age'] ?? 0,
       country: json['address']['country_name'] ?? '',
       telephone: json['telephone'] ?? '',

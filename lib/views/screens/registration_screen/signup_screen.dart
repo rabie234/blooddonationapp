@@ -167,7 +167,9 @@ class SignupScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                Obx(() => GoogleLoginButton(isDonor: controller.isDonor.value)),
+                Obx(() => GoogleLoginButton(
+                    isDonor: controller.isDonor.value,
+                    isTermsAccepted: isTermsAccepted.value)),
                 SizedBox(height: 10),
                 //  Obx(() =>FacebookLoginButton(isDonor: controller.isDonor.value)),
               ],

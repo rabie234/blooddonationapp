@@ -261,7 +261,9 @@ class SearchPage extends StatelessWidget {
           height:
               MediaQuery.of(context).size.height * 0.8, // 80% of screen height
           child: MapSearch(
-            donators: searchController.searchResults, // Pass the search results
+            donators: searchController.searchResults
+                .where((donor) => donor.mapVisible == true)
+                .toList(), // Pass the search results
           ),
         );
       },

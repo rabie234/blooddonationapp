@@ -13,12 +13,24 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleLoginButton extends StatelessWidget {
   final VoidCallback? onLoginSuccess;
   final bool? isDonor;
-  const GoogleLoginButton({super.key, this.onLoginSuccess, this.isDonor});
+  final bool isTermsAccepted;
+  const GoogleLoginButton(
+      {super.key,
+      this.onLoginSuccess,
+      this.isDonor,
+      required this.isTermsAccepted});
 
   Future<void> _loginWithGoogle(BuildContext context) async {
     final LoginController loginController = Get.put(LoginController());
     loginController.isLoading.value = true;
     try {
+      if (!isTermsAccepted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please accept the terms and conditions.')),
+        );
+        return;
+      }
+
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
@@ -28,9 +40,9 @@ class GoogleLoginButton extends StatelessWidget {
       }
       final location = await getCurrentLocation();
       if (location == null) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text('Location not available')),
-        // );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Location not available')),
+        );
         return; // Stop the sign-up process if location is not available
       }
 

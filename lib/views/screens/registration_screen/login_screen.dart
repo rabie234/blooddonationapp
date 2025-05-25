@@ -102,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(height: 10),
-                GoogleLoginButton(),
+                GoogleLoginButton(
+                  isTermsAccepted: true,
+                ),
                 SizedBox(height: 10),
                 // FacebookLoginButton(),
               ],

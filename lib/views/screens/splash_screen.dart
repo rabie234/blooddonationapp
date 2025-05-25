@@ -28,15 +28,14 @@ class SplashScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: GlobalColors.primaryColor,
+      backgroundColor: GlobalColors.backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.bloodtype,
-              size: 100,
-              color: GlobalColors.secondaryColor,
+            SizedBox(
+              width: 100,
+              child: Image.asset('assets/images/logo1.png'),
             ),
             SizedBox(height: 20),
             Text(
@@ -44,13 +43,22 @@ class SplashScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: GlobalColors.secondaryColor,
+                color: GlobalColors.primaryColor,
               ),
             ),
             SizedBox(height: 10),
             SpinKitChasingDots(
-              color: GlobalColors.backgroundColor,
+              color: GlobalColors.primaryColor,
               size: 40.0,
+            ),
+            SizedBox(height: 10),
+            Text(
+              'loading'.tr,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                color: GlobalColors.primaryColor,
+              ),
             ),
           ],
         ),

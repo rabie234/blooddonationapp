@@ -167,7 +167,7 @@ class DataSliderWidget extends StatelessWidget {
                                       ' ${donator.timeAgo} ago',
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        color: Colors.grey,
+                                        color: GlobalColors.primaryColor,
                                       ),
                                     )
                                 ],
