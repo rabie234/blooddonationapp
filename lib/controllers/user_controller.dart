@@ -15,6 +15,7 @@ class UserController extends GetxController {
 
   // TextEditingControllers for editable fields
   late TextEditingController firstNameController;
+  late TextEditingController userNameController;
   late TextEditingController lastNameController;
   late TextEditingController bloodTypeController;
   late TextEditingController phoneController;
@@ -34,6 +35,7 @@ class UserController extends GetxController {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
     bloodTypeController = TextEditingController();
+    userNameController = TextEditingController();
     phoneController = TextEditingController();
     countryController = TextEditingController();
     genderController = TextEditingController();
@@ -43,6 +45,7 @@ class UserController extends GetxController {
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     if (user.value != null) {
       firstNameController.text = user.value?.firstName ?? '';
+      userNameController.text = user.value?.username ?? '';
       lastNameController.text = user.value?.lastName ?? '';
       bloodTypeController.text = user.value?.bloodType ?? '';
       phoneController.text = user.value?.telephone ?? '';
@@ -198,7 +201,8 @@ class UserController extends GetxController {
         "name_visible": isNameVisible.value,
         "is_donor": isDonator.value,
         "map_visible": isMapVisible.value,
-        "notification_all": allNotifications.value
+        "notification_all": allNotifications.value,
+        "username": userNameController.text,
       };
       print(requestBody);
       // Send the PUT request to the API

@@ -1,6 +1,5 @@
 import 'package:blood_donation_app/controllers/user_controller.dart';
 import 'package:blood_donation_app/utils/global_colors.dart';
-import 'package:blood_donation_app/views/widgets/custom_button.dart';
 import 'package:blood_donation_app/views/widgets/custom_field.dart';
 import 'package:blood_donation_app/views/widgets/custom_snackbar.dart';
 import 'package:blood_donation_app/views/widgets/custom_switch.dart';
@@ -161,6 +160,12 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
+                SizedBox(height: 20),
+                CustomInputField(
+                  hintText: 'username'.tr,
+                  controller: userController.userNameController,
+                  keyboardType: TextInputType.text,
+                ),
                 SizedBox(height: 20),
                 // Editable fields
                 Row(
